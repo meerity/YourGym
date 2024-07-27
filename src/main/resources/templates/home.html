@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+
+<div th:replace="~{header :: header}">...</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <h2>Welcome to YourGym</h2>
+        <p>Your journey to fitness starts here!</p>
+        <a href="#about" class="cta-button">Learn More</a>
+    </div>
+</section>
+
+
+<section id="about" class="section">
+    <div class="container">
+        <div class="about-content">
+            <div class="text-content">
+                <h2 class="h2-left">About Us</h2>
+                <p>At YourGym, we are dedicated to helping you achieve your fitness goals. Our state-of-the-art facility offers a wide range of equipment, expert trainers, and a variety of classes to suit all fitness levels. Whether you're looking to build strength, improve flexibility, or boost your overall health, our personalized training programs and supportive community will guide you every step of the way. Join us and experience a healthier, happier you!</p>
+            </div>
+            <div class="logo">
+                <img src="/assets/images/logo-big.png" alt="YourGym Logo">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="trainers" class="section">
+    <div class="container">
+        <h2 class="h2-left">Our Trainers</h2>
+        <div class="trainer-grid">
+            <div class="trainer">
+                <img src="/assets/images/john.png" alt="Trainer 1">
+                <h3>John Doe</h3>
+                <p>John is a certified personal trainer with over 10 years of experience. He specializes in strength training and functional fitness, helping clients build muscle and improve their overall fitness levels.</p>
+            </div>
+            <div class="trainer">
+                <img src="/assets/images/jane.png" alt="Trainer 2">
+                <h3>Jane Smith</h3>
+                <p>Jane is a yoga instructor and nutrition expert. With her guidance, clients can achieve a balanced lifestyle through yoga practices and healthy eating habits. She has a passion for holistic wellness and mindfulness.</p>
+            </div>
+            <div class="trainer">
+                <img src="/assets/images/michael.jpg" alt="Trainer 3">
+                <h3>Michael Brown</h3>
+                <p>Michael is a high-intensity interval training (HIIT) coach with a focus on cardiovascular health and endurance. His dynamic workouts are designed to push clients to their limits while ensuring they have fun and stay motivated.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-section">
+    <div class="home-container">
+        <h2 class="h2-left">Features</h2>
+        <ul class="home-feature-list">
+            <li>
+                <div class="home-feature-content">
+                    <h3>ID-Card Registration</h3>
+                    <p>Register with your ID-Card to manage your visit history</p>
+                </div>
+            </li>
+            <li>
+                <div class="home-feature-content">
+                    <h3>Workout Schedule</h3>
+                    <p>View and book workout sessions easily.</p>
+                </div>
+            </li>
+            <li>
+                <div class="home-feature-content">
+                    <h3>Online Store</h3>
+                    <p>Order sports nutrition and pick up at the gym.</p>
+                </div>
+            </li>
+            <li>
+                <div class="home-feature-content">
+                    <h3>GymBuddy Bot</h3>
+                    <p>Your personal assistant for workout programs.</p>
+                </div>
+            </li>
+        </ul>
+        <a th:href="@{/features}" class="home-learn-more">Learn More</a>
+    </div>
+</section>
+
+
+<div th:replace="~{footer :: footer}">...</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section');
+
+        const observerOptions = {
+            root: null, // Использовать viewport как корневой элемент
+            rootMargin: '0px',
+            threshold: 0.1 // Когда 10% секции видимо
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Прекратить наблюдение после появления
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
+</body>
+</html>

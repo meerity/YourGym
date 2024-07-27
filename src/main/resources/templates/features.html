@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+
+<div th:replace="~{header :: header}">...</div>
+
+<section id="features">
+    <div class="container">
+        <h2 class="site-h2">Features</h2>
+        <div class="feature-grid">
+            <a href="#" class="feature-item">
+                <h3>ID-Card Registration</h3>
+                <p>Register with your ID-Card to manage your visit history.</p>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>Workout Schedule</h3>
+                <p>View and book workout sessions easily.</p>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>Online Store</h3>
+                <p>Order sports nutrition for your next workout.</p>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>GymBuddy Bot</h3>
+                <p>Get assistance with your workout programs and stay connected with your trainer.</p>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>Special Offers</h3>
+                <p>Receive notifications about promotions and offers.</p>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>Virtual Workouts</h3>
+                <p>Access online training videos and virtual workout sessions.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+<script src="/assets/js/link-script.js"></script>
+
+</body>
+</html>

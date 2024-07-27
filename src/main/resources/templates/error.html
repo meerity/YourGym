@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oops..</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<section id="error" class="error-pg">
+    <h2>Something went wrong!</h2>
+    <img src="/assets/images/error.png" alt="error">
+    <p th:text="${'Error message - ' + errorMsg}"></p>
+    <a class="cta-button" th:href="@{/home}">To Homepage</a>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+</body>
+</html>

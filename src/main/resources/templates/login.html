@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="login">
+    <div class="container">
+        <h2 class="site-h2">Login</h2>
+        <div class="messages">
+            <ul>
+                <li class="error" th:if="${!#strings.isEmpty(errorMessage)}"
+                    th:text="${errorMessage}" />
+            </ul>
+            <ul>
+                <li th:if="${successMessage != null}" class="success" th:text="${successMessage}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/login}" method="post" class="form">
+            <label for="username">Email or phone number:</label>
+            <input type="text"  id="username" name="username">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
+            <div class="form-footer">
+                <button type="submit">Login</button>
+                <a th:href="@{/register}">Don`t have an account?</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+<script>
+    function togglePassword(id) {
+        const passwordField = document.getElementById(id);
+        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    }
+</script>
+</body>
+</html>

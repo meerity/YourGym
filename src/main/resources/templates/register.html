@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="register">
+    <div class="container">
+        <h2>Register</h2>
+        <h3 class="caption">If you have visited YourGym, you can register with your ID Card</h3>
+        <div class="messages">
+            <ul>
+                <li th:each="error : ${#fields.errors('registrationForm.*')}" class="error" th:text="${error}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/do-register}" method="post" class="form" th:object="${registrationForm}">
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" id="email" name="email">
+            <label for="password">Create Password:<span class="required">*</span></label>
+            <input type="password" th:field="*{password}" id="password" name="password">
+            <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
+            <label for="confirm-password">Confirm Password:<span class="required">*</span></label>
+            <input type="password" th:field="*{confirmPassword}" id="confirm-password" name="confirm-password">
+            <span class="password-toggle" onclick="togglePassword('confirm-password')">👁️</span>
+            <label for="idCard">Gym ID Card:<span class="required">*</span></label>
+            <input type="text" th:field="*{cardNumber}" id="idCard" name="idCard">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+<script>
+    function togglePassword(id) {
+        const passwordField = document.getElementById(id);
+        passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+
+</head>
+<body>
+<header>
+    <div class="container">
+        <a th:href="@{/home}" class="header-logo">
+            <h1>YourGym</h1>
+            <img src="/assets/images/logo-small.png" alt="YourGym Logo">
+        </a>
+        <nav>
+            <a th:href="@{/home}">Home</a>
+
+            <a th:href="@{/features}">Features</a>
+
+            <a th:href="@{/feedback}">Contact Us</a>
+
+            <a th:href="@{/profile}" sec:authorize="isAuthenticated()" >Profile</a>
+
+            <a th:href="@{/login}" class="login-button"
+               sec:authorize="isAnonymous()">Login</a>
+
+            <a th:href="@{/register}" class="login-button"
+               sec:authorize="isAnonymous()">Register</a>
+
+            <a th:href="@{/logout}" class="login-button"
+               sec:authorize="isAuthenticated()">Logout</a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

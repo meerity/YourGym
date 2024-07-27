@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="contact">
+    <div class="container">
+        <h2 class="site-h2">Contact Us</h2>
+        <div class="messages">
+            <ul>
+                <li th:each="error : ${#fields.errors('contact.*')}" class="error" th:text="${error}"></li>
+            </ul>
+            <ul>
+                <li th:if="${successMessage != null}" class="success" th:text="${successMessage}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/feedback/saveMsg}" method="post" class="form" th:object="${contact}">
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{contactName}" id="name" name="name">
+            <label for="phone">Phone Number:</label>
+            <input type="text" th:field="*{contactMobileNum}" id="phone" name="phone">
+            <label for="email">Email:</label>
+            <input type="text" th:field="*{contactEmail}" id="email" name="email">
+            <label for="message">Message:</label>
+            <textarea id="message" th:field="*{message}" name="message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+</body>
+</html>
