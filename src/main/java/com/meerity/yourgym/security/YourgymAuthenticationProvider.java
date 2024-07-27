@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ import java.util.List;
 public class YourgymAuthenticationProvider implements AuthenticationProvider {
 
     private final PersonRepository personRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public YourgymAuthenticationProvider(PersonRepository personRepository) {
+    public YourgymAuthenticationProvider(PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
         this.personRepository = personRepository;
     }
 
@@ -32,13 +35,13 @@ public class YourgymAuthenticationProvider implements AuthenticationProvider {
         String emailOrPhone = authentication.getName();
         String password = authentication.getCredentials().toString();
         Person person;
-        if (emailOrPhone.matches("\\d{10,13}")) {
+        if (emailOrPhone.matches("\\d{12}")) {
             person = personRepository.findByPhoneNum(emailOrPhone);
         } else {
             person = personRepository.findByEmail(emailOrPhone);
         }
-        if (person != null && person.getPsw().equals(password)) {
-            return new UsernamePasswordAuthenticationToken(emailOrPhone, password, getAuthorities(person.getRole()));
+        if (person != null && passwordEncoder.matches(password, person.getPsw())) {
+            return new UsernamePasswordAuthenticationToken(emailOrPhone, null, getAuthorities(person.getRole()));
         }
         else {
             throw new BadCredentialsException("Invalid credentials");
