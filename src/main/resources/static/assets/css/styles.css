@@ -347,7 +347,6 @@ section .h2-left {
     transform: translateY(0);
 }
 
-/* Contact Us Page Styles */
 .form {
     max-width: 600px;
     margin: 0 auto;
@@ -356,12 +355,14 @@ section .h2-left {
     border-radius: 10px;
     border: 1px solid #333;
 }
+
+
 .form label {
     display: block;
     margin-bottom: 10px;
     color: #fff;
 }
-.form input, .form textarea {
+.form input, .form textarea, .form select {
     width: 95%;
     padding: 10px;
     margin-bottom: 20px;
@@ -370,6 +371,12 @@ section .h2-left {
     background-color: #fff;
     color: #000;
 }
+
+.form select{
+    z-index: 10;
+    position: relative;
+}
+
 .form input.short {
     width: calc(50% - 10px);
     display: inline-block;
@@ -377,21 +384,6 @@ section .h2-left {
 .form textarea {
     height: 150px;
     resize: vertical;
-}
-.form button {
-    background-color: #89939E; /* Цвет кнопки соответствует цвету лого */
-    color: #FFFFFF; /* Белый цвет текста */
-    border: 1px solid #636365; /* Граница в более темном цвете */
-    border-radius: 5px;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 1em;
-    cursor: pointer;
-    text-decoration: none;
-}
-.form button:hover {
-    background-color: #636365; /* Темнее оттенок при наведении */
-    border-color: #89939E;
 }
 
 .phone-wrapper {
@@ -413,8 +405,25 @@ section .h2-left {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 0 5px 5px 0;
-    margin-left: -1px;
 }
+
+.form button {
+    background-color: #89939E;
+    color: #FFFFFF;
+    border: 1px solid #636365;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 1em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form button:hover {
+    background-color: #636365; /* Темнее оттенок при наведении */
+    border-color: #89939E;
+}
+
 
 
 .form-footer {

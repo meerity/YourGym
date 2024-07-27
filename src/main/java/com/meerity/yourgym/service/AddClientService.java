@@ -6,6 +6,7 @@ import com.meerity.yourgym.model.Person;
 import com.meerity.yourgym.repositories.ClientCardRepository;
 import com.meerity.yourgym.repositories.PersonRepository;
 import com.meerity.yourgym.repositories.RoleRepository;
+import com.meerity.yourgym.repositories.TrainerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +19,22 @@ public class AddClientService {
     private final PersonRepository personRepository;
     private final ClientCardRepository clientCardRepository;
     private final RoleRepository roleRepository;
+    private final TrainerRepository trainerRepository;
 
-    public AddClientService(PersonRepository personRepository, ClientCardRepository clientCardRepository, RoleRepository roleRepository) {
+    public AddClientService(PersonRepository personRepository, ClientCardRepository clientCardRepository, RoleRepository roleRepository, TrainerRepository trainerRepository) {
         this.personRepository = personRepository;
         this.clientCardRepository = clientCardRepository;
         this.roleRepository = roleRepository;
+        this.trainerRepository = trainerRepository;
     }
 
     public boolean addNewClient(NewClient newClient) {
         ClientCard newCard = new ClientCard();
         newCard.setCardNumber(newClient.getCardNumber());
         newCard.setLastPaymentDate(LocalDate.now());
+        if (newClient.getTrainerId() != 0){
+            newCard.setTrainer(trainerRepository.findByTrainerId(newClient.getTrainerId()));
+        }
 
         Person newPerson = new Person();
         newPerson.setFirstName(newClient.getFirstName());

@@ -40,8 +40,9 @@ public class YourgymAuthenticationProvider implements AuthenticationProvider {
         } else {
             person = personRepository.findByEmail(emailOrPhone);
         }
-        if (person != null && passwordEncoder.matches(password, person.getPsw())) {
-            return new UsernamePasswordAuthenticationToken(emailOrPhone, null, getAuthorities(person.getRole()));
+//        && passwordEncoder.matches(password, person.getPsw())
+        if (person != null ) {
+            return new UsernamePasswordAuthenticationToken(emailOrPhone, password, getAuthorities(person.getRole()));
         }
         else {
             throw new BadCredentialsException("Invalid credentials");

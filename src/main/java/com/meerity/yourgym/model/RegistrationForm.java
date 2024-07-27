@@ -30,7 +30,6 @@ public class RegistrationForm {
     @NotBlank(message = "Password must not be blank")
     private String confirmPassword;
 
-
     @NotBlank(message = "Card number must not be blank")
     private String cardNumber;
 }

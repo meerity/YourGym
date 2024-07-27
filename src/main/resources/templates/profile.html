@@ -18,6 +18,11 @@
                 <h3>Register New User</h3>
             </a>
         </div>
+        <div class="feature-grid">
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-trainer}" class="feature-item">
+                <h3>Add new Trainer to team</h3>
+            </a>
+        </div>
     </div>
 </section>
 

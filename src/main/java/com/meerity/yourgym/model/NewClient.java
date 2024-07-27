@@ -26,4 +26,6 @@ public class NewClient {
     @Pattern(regexp = "^#[0-9]{6}$", message = "Please, provide a valid card number")
     private String cardNumber;
 
+    private long trainerId;
+
 }

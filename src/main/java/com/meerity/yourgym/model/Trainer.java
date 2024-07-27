@@ -1,6 +1,8 @@
 package com.meerity.yourgym.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,9 +19,13 @@ public class Trainer extends BaseEntity {
     @Column(name = "trainer_id")
     private long trainerId;
 
+    @NotBlank(message = "First name must not be blank")
+    @Size(min = 2, max = 75, message = "First name must be from 2 to 75 characters long")
     @Column(name = "trainer_first_name")
     private String trainerFirstName;
 
+    @NotBlank(message = "Last name must not be blank")
+    @Size(min = 2, max = 75, message = "Last name must be from 2 to 75 characters long")
     @Column(name = "trainer_last_name")
     private String trainerLastName;
 

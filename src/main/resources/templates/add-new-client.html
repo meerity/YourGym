@@ -11,7 +11,7 @@
 
 <section id="register">
     <div class="container">
-        <h2 class="site-h2">Create New User</h2>
+        <h2 class="site-h2">Add new Client</h2>
         <div class="messages">
             <ul>
                 <li th:each="error : ${#fields.errors('newClient.*')}" class="error" th:text="${error}"></li>
@@ -33,6 +33,17 @@
             <label for="idCard">Gym ID Card:</label>
             <input type="text" th:field="*{cardNumber}" id="idCard" name="idCard">
 
+            <label for="trainer">Trainer:</label>
+            <select th:field="*{trainerId}" id="trainer">
+                <option value="0">none</option>
+                <option th:each="trainer : ${trainers}"
+                        th:value="${trainer.trainerId}"
+                        th:text="${trainer.trainerFirstName + ' ' + trainer.trainerLastName}"></option>
+
+            </select>
+
+
+            <input type="hidden" id="isValid" value="true">
             <button type="submit">Create</button>
         </form>
 
