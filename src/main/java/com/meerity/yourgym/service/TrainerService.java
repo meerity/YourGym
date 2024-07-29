@@ -23,11 +23,21 @@ public class TrainerService {
         return trainerRepository.save(trainer) != null;
     }
 
-    public List<Trainer> getAllTrainers() {
-        return trainerRepository.findAll();
-    }
-
     public List<Trainer> getAllFreeTrainers() {
         return trainerRepository.getAllFreeTrainers();
+    }
+
+    public List<Object[]> getAllTrainersAndTraineeCount(){
+        return trainerRepository.getAllTrainersAndTraineesCount();
+    }
+
+    public boolean deleteTrainerByFullName(String firstName, String lastName) {
+        Trainer trainer = trainerRepository.findByTrainerFirstNameAndTrainerLastName(firstName, lastName);
+        if (trainer != null) {
+            trainerRepository.delete(trainer);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

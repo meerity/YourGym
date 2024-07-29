@@ -20,8 +20,8 @@ public class ClientCardService {
         this.clientCardRepository = clientCardRepository;
     }
 
-    public ClientCard findByNumber(String number) {
-        return clientCardRepository.findByCardNumber(number);
+    public long getAllClientsCount() {
+        return clientCardRepository.count();
     }
 
     public LocalDate renewPayment(ClientCard clientCard) {
@@ -29,5 +29,15 @@ public class ClientCardService {
         clientCard.setLastPaymentDate(paymentDate);
         clientCardRepository.save(clientCard);
         return paymentDate;
+    }
+
+    public boolean deleteClientCard(String cardNumber) {
+        ClientCard clientCard = clientCardRepository.findByCardNumber(cardNumber);
+        if (clientCard != null) {
+            clientCardRepository.delete(clientCard);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

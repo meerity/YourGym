@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ClientCardRepository extends JpaRepository<ClientCard, Long> {
 
     ClientCard findByCardNumber(String cardNumber);
-
 }

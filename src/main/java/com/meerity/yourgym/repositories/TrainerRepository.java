@@ -12,6 +12,14 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 
     Trainer findByTrainerId(long id);
 
+    Trainer findByTrainerFirstNameAndTrainerLastName(String firstName, String lastName);
+
+    @Query("SELECT t.trainerFirstName, t.trainerLastName, COUNT(cc.cardId) AS traineeCount " +
+            "FROM Trainer t " +
+            "LEFT JOIN t.clientCards cc " +
+            "GROUP BY t.trainerId, t.trainerFirstName, t.trainerLastName " +
+            "ORDER BY t.trainerId")
+    List<Object[]> getAllTrainersAndTraineesCount();
 
     @Query("select t from Trainer t " +
             "left join ClientCard cc on t.trainerId = cc.trainer.trainerId" +

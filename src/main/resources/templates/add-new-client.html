@@ -38,11 +38,8 @@
                 <option th:each="trainer : ${trainers}"
                         th:value="${trainer.trainerId}"
                         th:text="${trainer.trainerFirstName + ' ' + trainer.trainerLastName}"></option>
-
             </select>
 
-
-            <input type="hidden" id="isValid" value="true">
             <button type="submit">Create</button>
         </form>
 

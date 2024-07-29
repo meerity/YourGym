@@ -13,16 +13,22 @@
 <section id="profile">
     <div class="container">
         <h2 class="site-h2">Dashboard</h2>
-        <div class="messages" th:if="${successMessage != null}">
-             <ul>
-                 <li class="success" th:text="${successMessage}"></li>
-             </ul>
+        <div class="messages">
+            <ul>
+                <li th:if="${successMessage != null}" class="success" th:text="${successMessage}"></li>
+            </ul>
         </div>
         <div class="profile-section">
             <h3>Statistics:</h3>
-            <ul>
-                <li class="success" th:text="${successMessage}"></li>
-            </ul>
+            <div sec:authorize="hasRole('ROLE_ADMIN')" id="total-stats">
+                <h4 th:text="${'Total number of clients: ' + clientsCount}"></h4>
+            </div>
+            <div id="trainer-stats">
+                <h4>Total Number of trainees per trainer </h4>
+                <ul th:each="row : ${session.trainersAndTraineeCount}">
+                    <li th:text="${row[0] + ' ' + row[1] + ': ' + row[2] + ' trainees'}"></li>
+                </ul>
+            </div>
         </div>
         <div class="feature-grid">
             <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-new-client}" class="feature-item">
@@ -30,6 +36,12 @@
             </a>
             <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-trainer}" class="feature-item">
                 <h3>Add new Trainer to team</h3>
+            </a>
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/delete-client}" class="feature-item">
+                <h3>Unregister client</h3>
+            </a>
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/delete-trainer}" class="feature-item">
+                <h3>Unregister trainer</h3>
             </a>
         </div>
     </div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Trainer - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="register">
+    <div class="container">
+        <h2 class="site-h2">Delete Trainer</h2>
+        <button onclick="history.back()" class="back-button">Go Back</button>
+        <div class="messages">
+            <ul>
+                <li th:if="${errorMessage != null}" class="error" th:text="${errorMessage}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/operator/delete-trainer}" th:method="delete" class="form">
+            <label for="firstName">First Name:</label>
+            <input type="text"  id="firstName" name="firstName">
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+            <button type="submit">Unregister</button>
+        </form>
+
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+</body>
+</html>
