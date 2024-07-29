@@ -27,6 +27,11 @@ public class OperatorController {
         this.trainerService = trainerService;
     }
 
+    @GetMapping("/dashboard")
+    public String displayDashboard() {
+        return "dashboard";
+    }
+
     @GetMapping("/add-new-client")
     public String addNewClient(Model model) {
         model.addAttribute("newClient", new NewClient());
@@ -43,7 +48,8 @@ public class OperatorController {
             }
             return "add-new-client";
         }
-        return "profile";
+        model.addAttribute("successMessage", "Successfully added new client");
+        return "dashboard";
     }
 
     @GetMapping("/add-trainer")
@@ -53,13 +59,14 @@ public class OperatorController {
     }
 
     @PostMapping("/add-trainer")
-    public String addNewClient(@Valid @ModelAttribute Trainer newTrainer, Errors errors) {
+    public String addNewClient(@Valid @ModelAttribute Trainer newTrainer, Errors errors, Model model) {
         if (errors.hasErrors() || !trainerService.addTrainer(newTrainer)){
             if (!errors.hasErrors()) {
                 errors.reject("newTrainer", "Error with creating new trainer");
             }
             return "add-trainer";
         }
-        return "profile";
+        model.addAttribute("successMessage", "Successfully added new trainer");
+        return "dashboard";
     }
 }

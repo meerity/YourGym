@@ -12,6 +12,7 @@
 <section id="register">
     <div class="container">
         <h2 class="site-h2">Add new Trainer</h2>
+        <button onclick="history.back()" class="back-button">Go Back</button>
         <div class="messages">
             <ul>
                 <li th:each="error : ${#fields.errors('newTrainer.*')}" class="error" th:text="${error}"></li>

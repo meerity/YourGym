@@ -28,7 +28,7 @@ public class Contact extends BaseEntity {
     private String contactName;
 
     @NotBlank(message = "Mobile number must not be blank")
-    @Pattern(regexp="(^\\d{10,13}$)", message = "Mobile number must be at least 10 characters")
+    @Pattern(regexp = "^\\d{12}$", message = "Invalid mobile number")
     @Column(name = "contact_mobile_number")
     private String contactMobileNum;
 

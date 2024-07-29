@@ -1,5 +1,6 @@
 package com.meerity.yourgym.service;
 
+import com.meerity.yourgym.model.EditForm;
 import com.meerity.yourgym.model.Person;
 import com.meerity.yourgym.model.RegistrationForm;
 import com.meerity.yourgym.repositories.PersonRepository;
@@ -37,5 +38,31 @@ public class PersonService {
             return true;
         }
         return false;
+    }
+
+    public Person findByEmailOrPhoneNumber(String emailOrPhone) {
+        if (emailOrPhone.matches("^\\d{10}")) {
+            return personRepository.findByPhoneNum(emailOrPhone);
+        }
+        else {
+            return personRepository.findByEmail(emailOrPhone);
+        }
+    }
+
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email);
+    }
+
+    public Person findByPhoneNum(String phoneNum) {
+        return personRepository.findByPhoneNum(phoneNum);
+    }
+
+    public Person updatePerson(Person person, EditForm editForm) {
+        person.setFirstName(editForm.getFormFirstName());
+        person.setLastName(editForm.getFormLastName());
+        person.setPhoneNum(editForm.getFormPhoneNum());
+        person.setEmail(editForm.getFormEmail());
+        personRepository.save(person);
+        return person;
     }
 }

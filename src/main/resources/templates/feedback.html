@@ -13,6 +13,7 @@
 <section id="contact">
     <div class="container">
         <h2 class="site-h2">Contact Us</h2>
+        <button onclick="history.back()" class="back-button">Go Back</button>
         <div class="messages">
             <ul>
                 <li th:each="error : ${#fields.errors('contact.*')}" class="error" th:text="${error}"></li>
@@ -24,8 +25,11 @@
         <form th:action="@{/feedback/saveMsg}" method="post" class="form" th:object="${contact}">
             <label for="name">Name:</label>
             <input type="text" th:field="*{contactName}" id="name" name="name">
-            <label for="phone">Phone Number:</label>
-            <input type="text" th:field="*{contactMobileNum}" id="phone" name="phone">
+            <label for="phoneNum">Phone Number:</label>
+            <div class="phone-wrapper">
+                <span class="phone-prefix">+380</span>
+                <input type="text" th:field="*{contactMobileNum}" id="phoneNum" name="phoneNum" maxlength="9">
+            </div>
             <label for="email">Email:</label>
             <input type="text" th:field="*{contactEmail}" id="email" name="email">
             <label for="message">Message:</label>
@@ -36,6 +40,13 @@
 </section>
 
 <div th:replace="~{footer :: footer}">...</div>
-
+<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        const phoneInput = document.getElementById('phoneNum');
+        if (phoneInput.value && !phoneInput.value.startsWith('380')) {
+            phoneInput.value = '380' + phoneInput.value;
+        }
+    });
+</script>
 </body>
 </html>

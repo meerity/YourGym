@@ -12,4 +12,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Person findByPhoneNum(String phone);
 
     Person findByCardCardNumber(String number);
+
 }

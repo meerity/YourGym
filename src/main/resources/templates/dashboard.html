@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="profile">
+    <div class="container">
+        <h2 class="site-h2">Dashboard</h2>
+        <div class="messages" th:if="${successMessage != null}">
+             <ul>
+                 <li class="success" th:text="${successMessage}"></li>
+             </ul>
+        </div>
+        <div class="profile-section">
+            <h3>Statistics:</h3>
+            <ul>
+                <li class="success" th:text="${successMessage}"></li>
+            </ul>
+        </div>
+        <div class="feature-grid">
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-new-client}" class="feature-item">
+                <h3>Register New User</h3>
+            </a>
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-trainer}" class="feature-item">
+                <h3>Add new Trainer to team</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+<script src="/assets/js/link-script.js"></script>
+
+</body>
+</html>

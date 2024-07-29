@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +12,37 @@
 <section id="profile">
     <div class="container">
         <h2 class="site-h2">Profile</h2>
-        <div class="feature-grid">
-            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-new-client}" class="feature-item">
-                <h3>Register New User</h3>
-            </a>
+
+        <div class="profile-section">
+            <h3>Profile Information</h3>
+            <p><strong>FullName:</strong> <span th:text="${session.person.firstName} + ' ' + ${session.person.lastName}"></span></p>
+            <p><strong>Your gym pass is valid until </strong> <span th:text="${session.nextPaymentDate}"></span></p>
+            <p th:if="${session.nextPaymentDate.isBefore(T(java.time.LocalDate).now())}"><strong>Your gym pass has expired. Please make a payment to renew your subscription. </strong></p>
+            <p>You can renew your subscription in gym, or pay here: </p>
+            <a th:href="@{/payment}" class="login-button">Renew Subscription</a>
+            <a th:href="@{/profile/edit}" class="login-button">Edit Profile Information</a>
         </div>
+
+        <div class="trainer-section">
+            <h3>Your Trainer</h3>
+            <div th:if="${session.trainer != null}">
+                <p><strong>Name:</strong> <span th:text="${session.trainer.trainerFirstName} + ' ' + ${session.trainer.trainerLastName}"></span></p>
+                <img class="profile-trainer-img" th:src="@{/assets/images/{fileName}(fileName=${session.trainer.trainerFirstName + session.trainer.trainerLastName + '.png'})}" alt="Trainer Photo">
+            </div>
+            <div th:if="${session.trainer == null}">
+                <p>You don't have a trainer assigned yet.</p>
+            </div>
+        </div>
+
         <div class="feature-grid">
-            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-trainer}" class="feature-item">
-                <h3>Add new Trainer to team</h3>
+            <a href="#" class="feature-item">
+                <h3>Nutrition Shop</h3>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>My Achievements</h3>
+            </a>
+            <a href="#" class="feature-item">
+                <h3>Video courses</h3>
             </a>
         </div>
     </div>

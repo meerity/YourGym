@@ -18,12 +18,12 @@ public class NewClient {
     private String lastName;
 
     @UniqueField(type = UniqueField.FieldType.PHONE_NUMBER, message = "Phone number already registered")
-    @Pattern(regexp = "(^\\d{12}$)", message = "Invalid mobile number")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid mobile number")
     private String phoneNum;
 
     @UniqueField(type = UniqueField.FieldType.CARD_NUMBER, message = "This card number already registered")
     @NotBlank(message = "Card number must not be blank")
-    @Pattern(regexp = "^#[0-9]{6}$", message = "Please, provide a valid card number")
+    @Pattern(regexp = "^\\d{6}$", message = "Please, provide a valid card number")
     private String cardNumber;
 
     private long trainerId;

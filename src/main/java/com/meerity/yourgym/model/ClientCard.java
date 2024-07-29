@@ -29,4 +29,6 @@ public class ClientCard extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "trainer_id", referencedColumnName = "trainer_id")
     private Trainer trainer;
+
+
 }
