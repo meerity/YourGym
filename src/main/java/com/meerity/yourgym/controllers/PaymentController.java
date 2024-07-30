@@ -29,7 +29,7 @@ public class PaymentController {
     @PatchMapping("/payment")
     public String payment(HttpSession session) {
         Person person = (Person) session.getAttribute("person");
-        LocalDate paymentDate = clientCardService.renewPayment(person.getCard());
+        LocalDate paymentDate = clientCardService.renewPaymentAndGetNewDate(person.getCard());
         LocalDate nextPaymentDate = paymentDate.plusMonths(1);
         session.setAttribute("nextPaymentDate", nextPaymentDate);
         return "profile";

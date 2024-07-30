@@ -37,8 +37,8 @@
             <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/add-trainer}" class="feature-item">
                 <h3>Add new Trainer to team</h3>
             </a>
-            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/delete-client}" class="feature-item">
-                <h3>Unregister client</h3>
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/find-client}" class="feature-item">
+                <h3>Check client</h3>
             </a>
             <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/delete-trainer}" class="feature-item">
                 <h3>Unregister trainer</h3>

@@ -23,12 +23,20 @@ public class TrainerService {
         return trainerRepository.save(trainer) != null;
     }
 
+    public List<Trainer> getAllTrainers() {
+        return trainerRepository.findAll();
+    }
+
     public List<Trainer> getAllFreeTrainers() {
         return trainerRepository.getAllFreeTrainers();
     }
 
     public List<Object[]> getAllTrainersAndTraineeCount(){
         return trainerRepository.getAllTrainersAndTraineesCount();
+    }
+
+    public Trainer getTrainerById(long id) {
+        return trainerRepository.findByTrainerId(id);
     }
 
     public boolean deleteTrainerByFullName(String firstName, String lastName) {

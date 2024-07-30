@@ -24,19 +24,40 @@ public class ClientCardService {
         return clientCardRepository.count();
     }
 
-    public LocalDate renewPayment(ClientCard clientCard) {
+    public LocalDate renewPaymentAndGetNewDate(ClientCard clientCard) {
         LocalDate paymentDate = LocalDate.now();
         clientCard.setLastPaymentDate(paymentDate);
         clientCardRepository.save(clientCard);
         return paymentDate;
     }
 
-    public boolean deleteClientCard(String cardNumber) {
+    public boolean updatePaymentDate(ClientCard clientCard) {
+        try {
+            clientCard.setLastPaymentDate(LocalDate.now());
+            clientCardRepository.save(clientCard);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteClientCardByNumber(String cardNumber) {
         ClientCard clientCard = clientCardRepository.findByCardNumber(cardNumber);
         if (clientCard != null) {
             clientCardRepository.delete(clientCard);
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public boolean deleteClientCard(ClientCard clientCard) {
+        try {
+            clientCardRepository.delete(clientCard);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage());
             return false;
         }
     }

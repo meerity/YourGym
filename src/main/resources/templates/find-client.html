@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Client - YourGym</title>
+    <title>Find Client - YourGym</title>
     <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
 </head>
 <body>
@@ -11,17 +11,17 @@
 
 <section id="register">
     <div class="container">
-        <h2 class="site-h2">Delete Client</h2>
+        <h2 class="site-h2">Find Client By Id Card</h2>
         <button onclick="history.back()" class="back-button">Go Back</button>
         <div class="messages">
             <ul>
                 <li th:if="${errorMessage != null}" class="error" th:text="${errorMessage}"></li>
             </ul>
         </div>
-        <form th:action="@{/operator/delete-client}" th:method="delete" class="form">
-            <label for="idCard">Gym ID Card:</label>
-            <input type="text" id="idCard" name="idCard">
-            <button type="submit">Unregister</button>
+        <form th:action="@{/operator/client-info}" th:method="get" class="form">
+            <label for="cardNum">Gym ID Card:</label>
+            <input type="text" id="cardNum" name="cardNum">
+            <button type="submit">Search</button>
         </form>
 
     </div>

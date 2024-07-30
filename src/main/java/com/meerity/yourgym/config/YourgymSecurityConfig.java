@@ -35,7 +35,7 @@ public class YourgymSecurityConfig {
 
     @Bean
     SecurityFilterChain basicSecurityConfig(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/feedback/saveMsg", "/profile/**")).
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/feedback/saveMsg", "/profile/**", "/operator/**")).
                 authorizeHttpRequests(requests -> requests
                 .requestMatchers("/assets/**", "/", "/home", "/features", "/feedback/**", "/login", "/logout", "/error", "/register", "/do-register").permitAll()
                 .requestMatchers("/payment").authenticated()
