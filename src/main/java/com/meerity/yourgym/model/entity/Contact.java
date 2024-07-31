@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.entity;
 
 import com.meerity.yourgym.service.ContactService;
 import jakarta.persistence.*;

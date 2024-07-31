@@ -1,6 +1,6 @@
 package com.meerity.yourgym.service;
 
-import com.meerity.yourgym.model.Contact;
+import com.meerity.yourgym.model.entity.Contact;
 import com.meerity.yourgym.repositories.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

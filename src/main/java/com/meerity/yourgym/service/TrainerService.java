@@ -1,12 +1,14 @@
 package com.meerity.yourgym.service;
 
-import com.meerity.yourgym.model.Trainer;
+import com.meerity.yourgym.model.dto.ClientInfoDTO;
+import com.meerity.yourgym.model.dto.TrainerAndTraineesDTO;
+import com.meerity.yourgym.model.entity.Trainer;
 import com.meerity.yourgym.repositories.TrainerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -31,8 +33,18 @@ public class TrainerService {
         return trainerRepository.getAllFreeTrainers();
     }
 
-    public List<Object[]> getAllTrainersAndTraineeCount(){
+    public List<TrainerAndTraineesDTO> getAllTrainersAndTraineeCount(){
         return trainerRepository.getAllTrainersAndTraineesCount();
+    }
+
+    public Map<Trainer, List<ClientInfoDTO>> getClientInfoByTrainer() {
+        List<Trainer> trainers = trainerRepository.findAll();
+        Map<Trainer, List<ClientInfoDTO>> clientInfoByTrainer = new LinkedHashMap<>();
+        for (Trainer trainer : trainers) {
+            List<ClientInfoDTO> clientInfo = trainerRepository.getAllPeopleInfoByTrainerId(trainer.getTrainerId());
+            clientInfoByTrainer.put(trainer, clientInfo);
+        }
+        return clientInfoByTrainer;
     }
 
     public Trainer getTrainerById(long id) {

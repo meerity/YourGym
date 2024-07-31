@@ -1,6 +1,6 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.Person;
+import com.meerity.yourgym.model.entity.Person;
 import com.meerity.yourgym.service.ClientCardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.meerity.yourgym.security;
 
-import com.meerity.yourgym.model.Person;
+import com.meerity.yourgym.model.entity.Person;
 import com.meerity.yourgym.repositories.PersonRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

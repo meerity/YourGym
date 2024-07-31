@@ -1,6 +1,11 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.*;
+import com.meerity.yourgym.model.dto.TrainerAndTraineesDTO;
+import com.meerity.yourgym.model.entity.ClientCard;
+import com.meerity.yourgym.model.entity.Person;
+import com.meerity.yourgym.model.entity.Trainer;
+import com.meerity.yourgym.model.forms.EditFormWithTrainer;
+import com.meerity.yourgym.model.forms.NewClient;
 import com.meerity.yourgym.service.AddClientService;
 import com.meerity.yourgym.service.ClientCardService;
 import com.meerity.yourgym.service.PersonService;
@@ -14,6 +19,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -38,8 +44,14 @@ public class OperatorController {
     @GetMapping("/dashboard")
     public String displayDashboard(HttpSession session, Model model) {
         model.addAttribute("clientsCount", clientCardService.getAllClientsCount());
-        session.setAttribute("trainersAndTraineeCount", trainerService.getAllTrainersAndTraineeCount());
+        session.setAttribute("trainersAndTrainee", trainerService.getAllTrainersAndTraineeCount());
         return "dashboard";
+    }
+
+    @GetMapping("/admin-stats")
+    public String displayAdminStats(Model model) {
+        model.addAttribute("trainerClientsMap", trainerService.getClientInfoByTrainer());
+        return "admin-stats";
     }
 
     @GetMapping("/add-new-client")
@@ -98,6 +110,7 @@ public class OperatorController {
     public String deleteClient(HttpSession session, Model model,
                                RedirectAttributes redirectAttributes) {
         Person person = (Person) session.getAttribute("person");
+
         if (!clientCardService.deleteClientCard(person.getCard())){
             model.addAttribute("person", person);
             model.addAttribute("trainers", session.getAttribute("trainers"));
@@ -115,11 +128,13 @@ public class OperatorController {
     public String updatePaymentDate(HttpSession session, Model model) {
         Person person = (Person) session.getAttribute("person");
         ClientCard card = person.getCard();
+
         if (!clientCardService.updatePaymentDate(card)){
             model.addAttribute("errorMessage", "Error with deleting client card. Maybe this client card has not been registered?");
         } else {
             model.addAttribute("successMessage", "Successfully updated payment date");
         }
+
         model.addAttribute("editFormT", session.getAttribute("editFormT"));
         model.addAttribute("person", person);
         model.addAttribute("trainers", session.getAttribute("trainers"));
@@ -130,19 +145,23 @@ public class OperatorController {
     public String editClient(@Valid @ModelAttribute EditFormWithTrainer editFormT,
                              Errors errors, HttpSession session, Model model){
         Person person = (Person) session.getAttribute("person");
+
         if (person.getEmail() != null) {
             if (!person.getEmail().equals(editFormT.getFormEmail()) && personService.findByEmail(editFormT.getFormEmail()) != null) {
                 errors.reject("editFormT", "This email is already registered");
             }
         }
+
         if (!person.getPhoneNum().equals(editFormT.getFormPhoneNum()) && personService.findByPhoneNum(editFormT.getFormPhoneNum()) != null) {
             errors.reject("editFormT",  "This phone number is already registered");
         }
+
         if (errors.hasErrors()) {
             model.addAttribute("editFormT", editFormT);
             model.addAttribute("errors", errors);
             return "client-info";
         }
+
         Person editedPerson = personService.updatePersonOP(editFormT, person);
         session.setAttribute("person", editedPerson);
         model.addAttribute("editFormT", editFormT);
@@ -166,6 +185,7 @@ public class OperatorController {
             }
             return "add-trainer";
         }
+        
         redirectAttributes.addFlashAttribute("successMessage", "Successfully added new trainer");
         return "redirect:/operator/dashboard";
     }

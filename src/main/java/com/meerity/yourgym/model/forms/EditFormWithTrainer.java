@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.forms;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

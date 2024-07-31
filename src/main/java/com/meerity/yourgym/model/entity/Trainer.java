@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -12,7 +12,7 @@
 <section id="payment">
     <div class="container">
         <h2 class="site-h2">Pay to renew subscription</h2>
-        <button onclick="history.back()" class="back-button">Go Back</button>
+        <a th:href="@{/profile}" class="back-button">Go Back</a>
         <form class="form" th:action="@{/payment}" th:method="patch">
             <button type="submit" class="cta-button">Pay Now</button>
         </form>

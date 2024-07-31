@@ -11,7 +11,7 @@
     <div class="container">
         <h2 class="site-h2">Client Info</h2>
         <h3 class="caption">Edit client information if needed</h3>
-        <button onclick="history.back()" class="back-button">Go Back</button>
+        <a th:href="@{dashboard}" class="back-button">Go Back</a>
         <div class="messages" th:if="${errors != null}" >
             <ul>
                 <li th:each="error : ${errors.allErrors}" class="error" th:text="${error.defaultMessage}"></li>

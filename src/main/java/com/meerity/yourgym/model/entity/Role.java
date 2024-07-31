@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Role extends BaseEntity{
+public class Role extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

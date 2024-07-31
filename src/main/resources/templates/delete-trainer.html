@@ -12,7 +12,7 @@
 <section id="register">
     <div class="container">
         <h2 class="site-h2">Delete Trainer</h2>
-        <button onclick="history.back()" class="back-button">Go Back</button>
+        <a th:href="@{dashboard}" class="back-button">Go Back</a>
         <div class="messages">
             <ul>
                 <li th:if="${errorMessage != null}" class="error" th:text="${errorMessage}"></li>

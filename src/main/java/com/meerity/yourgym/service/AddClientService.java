@@ -1,8 +1,8 @@
 package com.meerity.yourgym.service;
 
-import com.meerity.yourgym.model.ClientCard;
-import com.meerity.yourgym.model.NewClient;
-import com.meerity.yourgym.model.Person;
+import com.meerity.yourgym.model.entity.ClientCard;
+import com.meerity.yourgym.model.forms.NewClient;
+import com.meerity.yourgym.model.entity.Person;
 import com.meerity.yourgym.repositories.ClientCardRepository;
 import com.meerity.yourgym.repositories.PersonRepository;
 import com.meerity.yourgym.repositories.RoleRepository;

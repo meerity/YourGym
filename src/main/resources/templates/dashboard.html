@@ -25,9 +25,10 @@
             </div>
             <div id="trainer-stats">
                 <h4>Total Number of trainees per trainer </h4>
-                <ul th:each="row : ${session.trainersAndTraineeCount}">
-                    <li th:text="${row[0] + ' ' + row[1] + ': ' + row[2] + ' trainees'}"></li>
+                <ul th:each="row : ${session.trainersAndTrainee}">
+                    <li th:text="${row.trainerFirstName + ' ' + row.trainerLastName + ': ' + row.traineesCount + ' trainees'}"></li>
                 </ul>
+                <a class="login-button" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/operator/admin-stats}">See More</a>
             </div>
         </div>
         <div class="feature-grid">

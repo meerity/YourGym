@@ -1,9 +1,9 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.ClientCard;
-import com.meerity.yourgym.model.EditForm;
-import com.meerity.yourgym.model.Person;
-import com.meerity.yourgym.model.Trainer;
+import com.meerity.yourgym.model.entity.ClientCard;
+import com.meerity.yourgym.model.forms.EditForm;
+import com.meerity.yourgym.model.entity.Person;
+import com.meerity.yourgym.model.entity.Trainer;
 import com.meerity.yourgym.service.PersonService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;

@@ -10,7 +10,7 @@
 <section id="edit-profile">
     <div class="container">
         <h2 class="site-h2">Edit Profile</h2>
-        <button onclick="history.back()" class="back-button">Go Back</button>
+        <a th:href="@{/profile}" class="back-button">Go Back</a>
         <div class="messages">
             <ul>
                 <li th:each="error : ${#fields.errors('editForm.*')}" class="error" th:text="${error}"></li>

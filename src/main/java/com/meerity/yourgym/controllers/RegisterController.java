@@ -1,6 +1,6 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.RegistrationForm;
+import com.meerity.yourgym.model.forms.RegistrationForm;
 import com.meerity.yourgym.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

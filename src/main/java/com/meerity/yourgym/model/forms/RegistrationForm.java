@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.forms;
 
 import com.meerity.yourgym.annotations.EqualFields;
 import com.meerity.yourgym.annotations.Password;

@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.forms;
 
 import com.meerity.yourgym.annotations.UniqueField;
 import jakarta.validation.constraints.NotBlank;

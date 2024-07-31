@@ -1,4 +1,4 @@
-package com.meerity.yourgym.model;
+package com.meerity.yourgym.model.forms;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

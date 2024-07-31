@@ -1,7 +1,7 @@
 package com.meerity.yourgym.security;
 
-import com.meerity.yourgym.model.Person;
-import com.meerity.yourgym.model.Role;
+import com.meerity.yourgym.model.entity.Person;
+import com.meerity.yourgym.model.entity.Role;
 import com.meerity.yourgym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
