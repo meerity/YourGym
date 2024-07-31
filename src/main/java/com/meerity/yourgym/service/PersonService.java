@@ -1,6 +1,5 @@
 package com.meerity.yourgym.service;
 
-import com.meerity.yourgym.model.dto.ClientInfoDTO;
 import com.meerity.yourgym.model.entity.Person;
 import com.meerity.yourgym.model.entity.Trainer;
 import com.meerity.yourgym.model.forms.EditForm;

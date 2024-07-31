@@ -28,7 +28,7 @@ public class Contact extends BaseEntity {
     private String contactName;
 
     @NotBlank(message = "Mobile number must not be blank")
-    @Pattern(regexp = "^\\d{12}$", message = "Invalid mobile number")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid mobile number")
     @Column(name = "contact_mobile_number")
     private String contactMobileNum;
 
@@ -43,8 +43,11 @@ public class Contact extends BaseEntity {
 
     @Column(name = "contact_status")
     @Enumerated(EnumType.STRING)
-    private ContactService.ContactStatus status;
+    private ContactStatus status;
 
-
+    public enum ContactStatus {
+        Open,
+        Close
+    }
 }
 

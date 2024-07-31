@@ -522,6 +522,106 @@ section .h2-left {
 
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    color: #1f1f1f;
+    background-color: #96a0aa;
+}
+
+.pagination-container {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+
+.pagination li {
+    display: inline;
+}
+
+.pagination a, .pagination span {
+    padding: 8px 12px;
+    margin: 0 4px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #818181;
+}
+
+.page-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #777;
+    pointer-events: none;
+}
+
+.page-button.disabled span {
+    color: #777;
+}
+
+.page-size, .pagination {
+    display: flex;
+    align-items: center;
+}
+
+.page-size label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.page-size ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.page-size select, .pagination a {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #636365;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.sortable-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sortable-header a {
+    color: #1f1f1f;
+    text-decoration: none;
+}
+
+.sortable-header .sort-arrows {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
 .form-footer {
     display: flex;
     justify-content: space-between;

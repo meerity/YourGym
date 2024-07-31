@@ -16,6 +16,7 @@
         <div class="messages">
             <ul>
                 <li th:if="${successMessage != null}" class="success" th:text="${successMessage}"></li>
+                <li th:if="${errorMessage != null}" class="success" th:text="${errorMessage}"></li>
             </ul>
         </div>
         <div class="profile-section">
@@ -43,6 +44,9 @@
             </a>
             <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" th:href="@{/operator/delete-trainer}" class="feature-item">
                 <h3>Unregister trainer</h3>
+            </a>
+            <a sec:authorize="hasAnyRole('ROLE_OPERATOR', 'ROLE_ADMIN')" href="/operator/messages/1?size=5&sortField=contactName&sortDirection=asc" class="feature-item">
+                <h3>Check Messages</h3>
             </a>
         </div>
     </div>

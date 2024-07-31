@@ -1,25 +1,22 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.dto.TrainerAndTraineesDTO;
 import com.meerity.yourgym.model.entity.ClientCard;
+import com.meerity.yourgym.model.entity.Contact;
 import com.meerity.yourgym.model.entity.Person;
 import com.meerity.yourgym.model.entity.Trainer;
 import com.meerity.yourgym.model.forms.EditFormWithTrainer;
 import com.meerity.yourgym.model.forms.NewClient;
-import com.meerity.yourgym.service.AddClientService;
-import com.meerity.yourgym.service.ClientCardService;
-import com.meerity.yourgym.service.PersonService;
-import com.meerity.yourgym.service.TrainerService;
+import com.meerity.yourgym.service.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -31,14 +28,16 @@ public class OperatorController {
     private final AddClientService addClientService;
     private final ClientCardService clientCardService;
     private final PersonService personService;
+    private final ContactService contactService;
 
     public OperatorController(AddClientService addClientService,
                               TrainerService trainerService,
-                              ClientCardService clientCardService, PersonService personService) {
+                              ClientCardService clientCardService, PersonService personService, ContactService contactService) {
         this.clientCardService = clientCardService;
         this.addClientService = addClientService;
         this.trainerService = trainerService;
         this.personService = personService;
+        this.contactService = contactService;
     }
 
     @GetMapping("/dashboard")
@@ -206,5 +205,40 @@ public class OperatorController {
             redirectAttributes.addFlashAttribute("successMessage", "Successfully deleted trainer");
             return "redirect:/operator/dashboard";
         }
+    }
+
+    @GetMapping("/messages/{pageNum}")
+    public String displayMessagesPage(@PathVariable int pageNum,
+                                      @RequestParam int size,
+                                      @RequestParam String sortField,
+                                      @RequestParam String sortDirection, Model model) {
+        Page<Contact> msgPage = contactService.getContactsWithOpenStatus(pageNum, size, sortField, sortDirection);
+        List<Contact> contactMessages = msgPage.getContent();
+        int[] pageSizeArray = {5, 10, 25};
+        model.addAttribute("contactMessages", contactMessages);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("pageSize" , size);
+        model.addAttribute("pageSizeArray" , pageSizeArray);
+        model.addAttribute("totalPages", msgPage.getTotalPages());
+        model.addAttribute("totalMessages", msgPage.getTotalElements());
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDirection);
+        model.addAttribute("reverseSortDir", sortDirection.equals("asc") ? "desc" : "asc");
+        return "messages";
+    }
+
+    @PatchMapping("/message/close/{msgId}")
+    public String closeMessage(@PathVariable long msgId,
+                               @RequestParam int pageNum,
+                               @RequestParam int size,
+                               @RequestParam String sortField,
+                               @RequestParam String sortDirection,
+                               RedirectAttributes redirectAttributes){
+        if (!contactService.closeMessage(msgId)){
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Error with closing message with id: " + msgId + ". Contact DB administrator");
+            return "redirect:/operator/dashboard";
+        }
+        return "redirect:/operator/messages/" + pageNum + "?size=" + size + "&sortField=" + sortField + "&sortDirection=" + sortDirection;
     }
 }
