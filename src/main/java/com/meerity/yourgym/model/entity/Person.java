@@ -21,20 +21,20 @@ public class Person extends BaseEntity {
 
     @NotBlank(message = "First name must not be blank")
     @Size(min = 2, max = 75, message = "First name must be from 2 to 75 characters long")
-    @Column(name = "first_name")
+    @Column(name = "first_name", length = 75, nullable = false)
     private String firstName;
 
     @NotBlank(message = "Last name must not be blank")
     @Size(min = 2, max = 75, message = "Last name must be from 2 to 75 characters long")
-    @Column(name = "last_name")
+    @Column(name = "last_name", length = 75, nullable = false)
     private String lastName;
 
-    @Pattern(regexp = "^\\d{10}(\\d{2})?$", message = "Invalid mobile number")
-    @Column(name = "person_phone")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid mobile number")
+    @Column(name = "person_phone", length = 10)
     private String phoneNum;
 
     @Email(message = "Please provide a valid email address")
-    @Column(name = "person_email")
+    @Column(name = "person_email", length = 50)
     private String email;
 
     @Column(name = "person_psw")
@@ -47,7 +47,7 @@ public class Person extends BaseEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
     private Role role;
 
 }

@@ -21,12 +21,12 @@ public class Trainer extends BaseEntity {
 
     @NotBlank(message = "First name must not be blank")
     @Size(min = 2, max = 75, message = "First name must be from 2 to 75 characters long")
-    @Column(name = "trainer_first_name")
+    @Column(name = "trainer_first_name", length = 75, nullable = false)
     private String trainerFirstName;
 
     @NotBlank(message = "Last name must not be blank")
     @Size(min = 2, max = 75, message = "Last name must be from 2 to 75 characters long")
-    @Column(name = "trainer_last_name")
+    @Column(name = "trainer_last_name", length = 75, nullable = false)
     private String trainerLastName;
 
     @OneToMany(mappedBy = "trainer")

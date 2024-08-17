@@ -1,0 +1,364 @@
+@import "header-styles.css";
+@import "footer-styles.css";
+
+@font-face {
+    font-family: 'AbyssinicaSIL';
+    src: url('/assets/fonts/AbyssinicaSIL.ttf') format('truetype');
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #121212;
+}
+
+h2 {
+    font-family: 'AbyssinicaSIL', sans-serif;
+    font-size: 2em;
+    margin-top: 0;
+    font-weight: 300;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+}
+
+#features {
+    padding: 20px 0;
+}
+
+#features a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-rows: auto auto; /* Две строки: одна для обычных элементов, другая для большого */
+    gap: 20px; /* Отступы между строками и колонками */
+    width: 100%; /* Обеспечивает, что сетка занимает всю ширину контейнера */
+}
+
+.feature-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Автоматическое количество колонок */
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.special-row {
+    display: flex;
+    justify-content: center; /* Центрирует содержимое по горизонтали */
+    margin-top: 20px; /* Отступ сверху, если нужно */
+}
+
+.feature-item {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    background-color: #333333; /* Цвет фона */
+    border-radius: 8px; /* Закругление углов */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #FFFFFF; /* Цвет текста */
+}
+
+.feature-item a {
+    color: #FFFFFF; /* Белый цвет для текста ссылок */
+    text-decoration: none; /* Убирает подчеркивание у ссылок */
+}
+
+.feature-item img {
+    border-radius: 8px 8px 0 0; /* Закругление только верхних углов изображения */
+    width: 100%; /* Задает ширину изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+}
+
+.feature-row > .feature-item {
+    transform: scale(0.8); /* Уменьшение размера элементов в первой строке */
+}
+
+.feature-item.large {
+    width: 30%; /* Ширина элемента в специальной строке */
+    max-width: 400px; /* Максимальная ширина элемента */
+}
+
+.square-img {
+    background-color: #636365;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.large-img {
+    background-color: #636365;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.feature-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+.square-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.large-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.feature-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.central-block {
+    flex: 1;
+    margin-left: 20px;
+}
+
+
+.filter-sidebar {
+    background-color: #1f1f1f;
+    align-content: flex-start;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.price-filter {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.price-filter p {
+    margin: 0;
+    color: #fff;
+}
+
+.price-filter label {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.price-filter input[type="number"]{
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+}
+
+
+/* Фильтр по производителю */
+.checkbox-filter {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.checkbox-filter p {
+    margin: 0;
+    color: #fff;
+}
+
+.checkbox-filter label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.checkbox-filter input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Кнопка применения фильтров */
+button[type="submit"] {
+    background-color: #89939E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #636365;
+}
+
+
+.upper-central-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upper-central-block p {
+    margin: 0;
+}
+
+.sort-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.sort-dropdown label {
+    margin-right: 10px;
+}
+
+.sort-dropdown select {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #636365;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для блока с товарами */
+.product-list {
+    align-self: center;
+    margin-bottom: 20px;
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1f1f1f;
+    margin: 20px;
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Стили для пагинации */
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style-type: none;
+}
+
+.page-item {
+    margin: 0 2px;
+}
+
+.page-item button {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: #636365;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.page-item button.disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+}
+
+.page-item button:hover:not(.disabled) {
+    background-color: #e0e0e0;
+}
+
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style-type: none;
+}
+
+.page-item {
+    margin: 0 2px;
+}
+
+.page-item button {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: #636365;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.page-item button.disabled {
+    background-color: #89939E;
+    color: white;
+    border: 1px solid #89939E;
+    cursor: not-allowed;
+}
+
+
+/* Стили для выпадающего списка количества товаров на странице */
+.items-per-page {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.items-per-page label {
+    margin-right: 10px;
+}
+
+.items-per-page select {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #636365;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

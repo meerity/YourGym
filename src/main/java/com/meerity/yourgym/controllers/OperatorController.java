@@ -212,7 +212,7 @@ public class OperatorController {
                                       @RequestParam int size,
                                       @RequestParam String sortField,
                                       @RequestParam String sortDirection, Model model) {
-        Page<Contact> msgPage = contactService.getContactsWithOpenStatus(pageNum, size, sortField, sortDirection);
+        Page<Contact> msgPage = contactService.getContactsWithOpenStatusWithPagination(pageNum, size, sortField, sortDirection);
         List<Contact> contactMessages = msgPage.getContent();
         int[] pageSizeArray = {5, 10, 25};
         model.addAttribute("contactMessages", contactMessages);

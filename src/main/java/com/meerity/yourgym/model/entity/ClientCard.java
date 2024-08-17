@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Data
@@ -20,15 +21,16 @@ public class ClientCard extends BaseEntity {
     private long cardId;
 
     @Setter
-    @Column(name = "card_number")
+    @Column(name = "card_number", length = 6, unique = true, nullable = false)
     private String cardNumber;
 
-    @Column(name = "last_payment_date")
+    @Column(name = "last_payment_date", nullable = false)
     private LocalDate lastPaymentDate;
 
     @ManyToOne
     @JoinColumn(name = "trainer_id", referencedColumnName = "trainer_id")
     private Trainer trainer;
 
-
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    private Set<Order> orders;
 }

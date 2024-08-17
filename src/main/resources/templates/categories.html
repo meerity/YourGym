@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/shop-styles.css" th:href="@{/assets/css/shop-styles.css}">
+</head>
+<body>
+
+<div th:replace="~{header :: header}">...</div>
+
+<section id="features">
+    <h2 class="site-h2">Categories</h2>
+    <div class="container">
+        <div class="feature-grid">
+            <!-- Первая строка: Все категории, кроме первой -->
+            <div class="feature-row">
+                <div th:each="category, iterStat : ${categories}" class="feature-item">
+                    <a th:href="${category.pageUrl}">
+                        <img class="square-img" th:src="${category.imageUrl}" th:alt="${category.internalName}">
+                        <h3 th:text="${category.prodName}"></h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+
+</body>
+</html>

@@ -42,16 +42,6 @@ public class ClientCardService {
         }
     }
 
-    public boolean deleteClientCardByNumber(String cardNumber) {
-        ClientCard clientCard = clientCardRepository.findByCardNumber(cardNumber);
-        if (clientCard != null) {
-            clientCardRepository.delete(clientCard);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public boolean deleteClientCard(ClientCard clientCard) {
         try {
             clientCardRepository.delete(clientCard);
