@@ -24,7 +24,7 @@ public class CategoryService {
     }
 
     public List<Category> getCategories() {
-        return categoryRepository.findAll();
+        return categoryRepository.getAllOrderById();
     }
 
     public List<Manufacturer> getManufacturersByCategoryName(String categoryName) {

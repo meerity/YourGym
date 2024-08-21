@@ -1,4 +1,4 @@
-package com.meerity.yourgym.repositories.products.factory;
+package com.meerity.yourgym.repositories.products.provider;
 
 import com.meerity.yourgym.repositories.products.*;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class ProductRepositoryFactory {
+public class ProductRepositoryProvider {
     private final ProductRepository productRepository;
     private final ProteinRepository proteinRepository;
     private final PreWorkoutSupplementRepository preWorkoutSupplementRepository;
@@ -17,7 +17,7 @@ public class ProductRepositoryFactory {
     private final WaterRepository waterRepository;
 
 
-    public ProductRepositoryFactory(ProductRepository productRepository, ProteinRepository proteinRepository, PreWorkoutSupplementRepository preWorkoutSupplementRepository, EnergySupplementRepository energySupplementRepository, VitaminRepository vitaminRepository, SportDrinkRepository sportDrinkRepository, WaterRepository waterRepository) {
+    public ProductRepositoryProvider(ProductRepository productRepository, ProteinRepository proteinRepository, PreWorkoutSupplementRepository preWorkoutSupplementRepository, EnergySupplementRepository energySupplementRepository, VitaminRepository vitaminRepository, SportDrinkRepository sportDrinkRepository, WaterRepository waterRepository) {
         this.productRepository = productRepository;
         this.proteinRepository = proteinRepository;
         this.preWorkoutSupplementRepository = preWorkoutSupplementRepository;

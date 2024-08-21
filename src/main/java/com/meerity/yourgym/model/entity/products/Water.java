@@ -14,9 +14,6 @@ import lombok.EqualsAndHashCode;
 @Table(name = "water")
 public class Water extends Product {
 
-    @Column(length = 50, nullable = false)
-    private String flavor;
-
     @Column(name = "serving_size_g", nullable = false)
     private int servingSize;
 

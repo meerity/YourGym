@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @Table(name = "pre_workout_supplements")
 public class PreWorkoutSupplement extends Product {
 
-    @Column(precision = 5, scale = 2, name = "caffeine_content_percent", nullable = false)
-    private BigDecimal caffeineContent;
+    @Column(name = "caffeine_content_mg", nullable = false)
+    private int caffeineContent;
 
     @Column(length = 50, nullable = false)
     private String flavor;

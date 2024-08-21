@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Proteins - YourGym</title>
+    <link rel="stylesheet" th:href="@{/assets/css/shop-styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+<div class="container">
+
+
+    <div class="filter-sidebar">
+        <form th:action="@{/shop/proteins}" th:method="get">
+            <div class="price-filter">
+                <p>Price Range:</p>
+                <label for="minPrice">Min:</label>
+                <input type="number" id="minPrice" name="minPrice" min="0">
+
+                <label for="maxPrice">Max:</label>
+                <input type="number" id="maxPrice" name="maxPrice" min="0">
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Brands:</p>
+                <div th:each="brand : ${manufacturers}">
+                    <label>
+                        <input type="checkbox" name="brands" th:value="${brand.manufacturerId}" th:text="${brand.manufacturerName}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Forms</p>
+                <div th:each="form : ${forms}">
+                    <label>
+                        <input type="checkbox" name="form" th:value="${form}" th:text="${form.getDescription()}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Protein Contents</p>
+                <div th:each="content : ${proteinContents}">
+                    <label>
+                        <input type="checkbox" name="proteinContent" th:value="${content.getPercentage()}" th:text="${content.getDescription()}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Flavors</p>
+                <div th:each="flavor : ${flavors}">
+                    <label>
+                        <input type="checkbox" name="flavor" th:value="${flavor}" th:text="${flavor.getFlavorName()}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Pack Size</p>
+                <div th:each="servingSize : ${servingSizes}">
+                    <label>
+                        <input type="checkbox" name="servingSize" th:value="${servingSize.getGrams()}" th:text="${servingSize.getDescription()}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Sugar Content</p>
+                <div th:each="content : ${sugarContent}">
+                    <label>
+                        <input type="checkbox" name="sugarContent" th:value="${content.getPercentage()}" th:text="${content.getDescription()}">
+                    </label>
+                </div>
+            </div>
+
+            <div class="checkbox-filter">
+                <p>Vegan Product</p>
+                <div>
+                    <label for="vegan">
+                        <input type="radio" id="vegan" name="isVegan" value="true">
+                        Vegan
+                    </label>
+                    <label for="not-vegan">
+                        <input type="radio" id="not-vegan" name="isVegan" value="false">
+                        Not Vegan
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    <div class="central-block">
+        <div class="upper-central-block">
+            <p th:text="${'Found ' + totalProducts + ' results'}"></p>
+            <form th:action="@{proteins}" th:method="get" >
+                <div class="sort-dropdown">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort" name="sort" th:onchange="this.form.submit()">
+                        <option value="priceAsc" th:selected="${sort == 'priceAsc'}">Price (Low to High)</option>
+                        <option value="priceDesc" th:selected="${sort == 'priceDesc'}">Price (High to Low)</option>
+                        <option value="productNameAsc" th:selected="${sort == 'productNameAsc'}">Name (A to Z)</option>
+                        <option value="productNameDesc" th:selected="${sort == 'productNameDesc'}">Name (Z to A)</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <!-- Список товаров -->
+        <div class="product-list">
+            <div th:each="product : ${products}">
+                <div class="product-item">
+                    <img th:src="@{${product.smallImageUrl}}" alt="Product Image">
+                    <h3 th:text="${product.productName}">Product Name</h3>
+                    <p th:text="${product.price} + ' UAH'">Price</p>
+                    <button class="buy-button" th:onclick="|window.location.href='@{/product/{id}(id=${product.productId})}'|" >Buy</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination">
+
+                    <li class="page-item">
+                        <button th:disabled="${currentPage <= 1}"
+                                th:classappend="${currentPage > 1 ? '' : 'disabled'}"
+                                th:aria-disabled="${currentPage > 1 ? 'false' : 'true'}"
+                                th:onclick="|window.location.href='@{/shop/proteins(pageNum=${currentPage - 1}, size=${size}, sort=${sort})}'|">
+                            &lt;
+                        </button>
+                    </li>
+
+                    <li th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                        class="page-item">
+                        <button th:disabled="${pageNum == currentPage}"
+                                th:classappend="${pageNum == currentPage ? 'disabled' : ''}"
+                                th:onclick="|window.location.href='@{/shop/proteins(pageNum=${pageNum}, size=${size}, sort=${sort})}'|"
+                                th:aria-disabled="${pageNum == currentPage ? 'true' : 'false'}"
+                                th:text="${pageNum}">
+                        </button>
+                    </li>
+
+                    <li class="page-item">
+                        <button th:disabled="${currentPage >= totalPages}"
+                                th:classappend="${currentPage < totalPages ? '' : 'disabled'}"
+                                th:aria-disabled="${currentPage < totalPages ? 'false' : 'true'}"
+                                th:onclick="|window.location.href='@{/shop/proteins(pageNum=${currentPage + 1}, size=${size}, sort=${sort})}'|">
+                            &gt;
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <form th:action="@{proteins}" th:method="get" >
+            <div class="items-per-page">
+                <label for="size">Items per page:</label>
+                <select id="size" name="size" th:onchange="this.form.submit()">
+                    <option value="16" th:selected="${size == 16}">16</option>
+                    <option value="32" th:selected="${size == 32}">32</option>
+                    <option value="64" th:selected="${size == 64}">64</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="~{footer :: footer}">...</div>
+</body>
+</html>

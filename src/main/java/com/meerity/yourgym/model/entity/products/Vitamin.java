@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "vitamins_minerals")
+@Table(name = "vitamins")
 public class Vitamin extends Product {
 
     @Column(name = "serving_size_g", nullable = false)
@@ -19,7 +19,4 @@ public class Vitamin extends Product {
 
     @Column(precision = 5, scale = 2, name = "vitamin_content_percent", nullable = false)
     private BigDecimal vitaminContent;
-
-    @Column(precision = 5, scale = 2, name = "mineral_content_percent", nullable = false)
-    private BigDecimal mineralContent;
 }

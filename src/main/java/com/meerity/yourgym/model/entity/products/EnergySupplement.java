@@ -14,8 +14,11 @@ import java.math.BigDecimal;
 @Table(name = "energy_supplements")
 public class EnergySupplement extends Product {
 
-    @Column(name = "caffeine_content_g", nullable = false)
-    private int caffeineInG;
+    @Column(name = "caffeine_content_mg", nullable = false)
+    private int caffeineContent;
+
+    @Column(length = 50, nullable = false)
+    private String flavor;
 
     @Column(name = "serving_size_g", nullable = false)
     private int servingSize;

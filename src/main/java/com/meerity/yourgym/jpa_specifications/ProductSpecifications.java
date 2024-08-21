@@ -1,4 +1,4 @@
-package com.meerity.yourgym.jpaSpecifications;
+package com.meerity.yourgym.jpa_specifications;
 
 
 import com.meerity.yourgym.constants.ProductStatus;
@@ -38,16 +38,12 @@ public class ProductSpecifications {
         return (root, query, cb) -> root.get("sugarContent").in(percents);
     }
 
-    public static <T extends Product> Specification<T> hasCaffeineContent(List<BigDecimal> percents) {
-        return (root, query, cb) -> root.get("caffeineContent").in(percents);
+    public static <T extends Product> Specification<T> hasCaffeineContent(List<Integer> mg) {
+        return (root, query, cb) -> root.get("caffeineContent").in(mg);
     }
 
     public static <T extends Product> Specification<T> hasVitaminContent(List<BigDecimal> percents) {
         return (root, query, cb) -> root.get("vitaminContent").in(percents);
-    }
-
-    public static <T extends Product> Specification<T> hasMineralContent(List<BigDecimal> percents) {
-        return (root, query, cb) -> root.get("mineralContent").in(percents);
     }
 
     public static <T extends Product> Specification<T> hasProteinContents(List<BigDecimal> percents) {

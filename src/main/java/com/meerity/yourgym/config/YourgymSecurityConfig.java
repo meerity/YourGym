@@ -38,7 +38,7 @@ public class YourgymSecurityConfig {
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/feedback/saveMsg", "/profile/**", "/operator/**")).
                 authorizeHttpRequests(requests -> requests
                 .requestMatchers("/assets/**", "/", "/home", "/features", "/feedback/**", "/login", "/logout", "/error", "/register", "/do-register").permitAll()
-                .requestMatchers("/payment", "/shop/**").authenticated()
+                .requestMatchers("/payment", "/shop/**", "/product/**").authenticated()
                 .requestMatchers("/profile/**").hasRole("CLIENT")
                 .requestMatchers("/operator/**").hasAnyRole("ADMIN", "OPERATOR"))
                 .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer

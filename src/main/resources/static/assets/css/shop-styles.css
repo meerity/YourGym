@@ -38,61 +38,42 @@ h2 {
 
 .feature-grid {
     display: grid;
-    grid-template-rows: auto auto; /* Две строки: одна для обычных элементов, другая для большого */
-    gap: 20px; /* Отступы между строками и колонками */
-    width: 100%; /* Обеспечивает, что сетка занимает всю ширину контейнера */
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 100%;
 }
 
 .feature-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Автоматическое количество колонок */
-    gap: 10px; /* Расстояние между элементами */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
 }
-
-.special-row {
-    display: flex;
-    justify-content: center; /* Центрирует содержимое по горизонтали */
-    margin-top: 20px; /* Отступ сверху, если нужно */
-}
-
 .feature-item {
     display: block;
     text-align: center;
     overflow: hidden;
-    background-color: #333333; /* Цвет фона */
-    border-radius: 8px; /* Закругление углов */
+    background-color: #333333;
+    border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #FFFFFF; /* Цвет текста */
+    color: #FFFFFF;
 }
 
 .feature-item a {
-    color: #FFFFFF; /* Белый цвет для текста ссылок */
-    text-decoration: none; /* Убирает подчеркивание у ссылок */
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 .feature-item img {
-    border-radius: 8px 8px 0 0; /* Закругление только верхних углов изображения */
-    width: 100%; /* Задает ширину изображения */
-    height: auto; /* Сохраняет пропорции изображения */
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    height: auto;
 }
 
 .feature-row > .feature-item {
-    transform: scale(0.8); /* Уменьшение размера элементов в первой строке */
-}
-
-.feature-item.large {
-    width: 30%; /* Ширина элемента в специальной строке */
-    max-width: 400px; /* Максимальная ширина элемента */
+    transform: scale(0.95);
 }
 
 .square-img {
-    background-color: #636365;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.large-img {
     background-color: #636365;
     width: 100%;
     height: auto;
@@ -113,12 +94,6 @@ h2 {
 
 
 .square-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.large-img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -256,6 +231,12 @@ button[type="submit"]:hover {
     grid-template-columns: repeat(4, 1fr);
 }
 
+.product-list h3 {
+    font-family: 'AbyssinicaSIL', sans-serif;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
 .product-item {
     border: 1px solid #ddd;
     padding: 10px;
@@ -270,6 +251,34 @@ button[type="submit"]:hover {
     height: auto;
     border-radius: 5px;
 }
+
+.buy-button {
+    background-color: #89939E;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.buy-button:hover {
+    background-color: #636365;
+    transform: scale(1.05);
+}
+
+.buy-button:active {
+    background-color: #4a4a4a;
+    transform: scale(1);
+}
+
+.buy-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Стили для пагинации */
 .pagination-container {
@@ -361,4 +370,86 @@ button[type="submit"]:hover {
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+/* Стили для страницы товара */
+.product-page {
+    color: #fff;
+    padding: 20px;
+}
+
+.product-image {
+    text-align: center;
+
+}
+
+.main-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px 0 0 8px;
+}
+
+.product-info {
+    width: 100%;
+    height: 345px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border-radius: 0 8px 8px 0;
+}
+
+.product-info h1 {
+    font-size: 2em;
+    margin: 0;
+    font-family: 'AbyssinicaSIL', sans-serif;
+}
+
+.product-info p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 1.5em;
+    color: #fff;
+    margin: 20px 0;
+}
+
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-actions label {
+    font-size: 1em;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.product-actions input[type="number"] {
+    width: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1em;
+    text-align: center;
+}
+
+.product-actions .buy-button {
+    background-color: #89939E;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.product-actions .buy-button:hover {
+    background-color: #636365;
 }

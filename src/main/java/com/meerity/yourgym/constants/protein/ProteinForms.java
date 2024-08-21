@@ -1,11 +1,16 @@
 package com.meerity.yourgym.constants.protein;
 
-import com.meerity.yourgym.constants.TextFormatter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public enum ProteinForms implements TextFormatter {
-    POWDER,
-    BAR,
-    TABLET,
-    LIQUID,
-    OTHER
+@Getter
+@AllArgsConstructor
+public enum ProteinForms {
+    POWDER("Powder"),
+    BAR("Bar"),
+    TABLET("Tablet"),
+    LIQUID("Liquid"),
+    OTHER("Other");
+
+    private final String description;
 }

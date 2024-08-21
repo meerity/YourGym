@@ -51,8 +51,11 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
-    @Column(length = 128)
-    private String imageUrl;
+    @Column(length = 128, name = "small_image_url")
+    private String smallImageUrl;
+
+    @Column(length = 128, name = "large_image_url")
+    private String largeImageUrl;
 
     @OneToMany(mappedBy = "product")
     Set<OrderItem> items;

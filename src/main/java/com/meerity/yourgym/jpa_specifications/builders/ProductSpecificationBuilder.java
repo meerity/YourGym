@@ -1,4 +1,4 @@
-package com.meerity.yourgym.jpaSpecifications.builders;
+package com.meerity.yourgym.jpa_specifications.builders;
 
 import com.meerity.yourgym.constants.ProductStatus;
 import com.meerity.yourgym.model.entity.products.Product;
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.meerity.yourgym.jpaSpecifications.ProductSpecifications.*;
+import static com.meerity.yourgym.jpa_specifications.ProductSpecifications.*;
 
 public class ProductSpecificationBuilder<T extends Product> {
 
@@ -25,9 +25,13 @@ public class ProductSpecificationBuilder<T extends Product> {
     }
 
     public ProductSpecificationBuilder<T> withPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
-        if (minPrice != null && maxPrice != null) {
-            this.specification = specification.and(hasPriceBetween(minPrice, maxPrice));
+        if (minPrice == null) {
+            minPrice = BigDecimal.ZERO;
         }
+        if (maxPrice == null) {
+            maxPrice = BigDecimal.valueOf(100_000);
+        }
+        this.specification = specification.and(hasPriceBetween(minPrice, maxPrice));
         return this;
     }
 
@@ -45,14 +49,19 @@ public class ProductSpecificationBuilder<T extends Product> {
         return this;
     }
 
-    public ProductSpecificationBuilder<T> hasContentPercent(ProductContentType type, List<BigDecimal> percent) {
+    public ProductSpecificationBuilder<T> withCaffeineContentMg(List<Integer> caffeineMg) {
+        if (caffeineMg != null) {
+            this.specification = specification.and(hasCaffeineContent(caffeineMg));
+        }
+        return this;
+    }
+
+    public ProductSpecificationBuilder<T> withContentPercent(ProductContentTypeForPercents type, List<BigDecimal> percent) {
         if (percent != null) {
             switch (type) {
                 case SUGAR ->  this.specification = specification.and(hasSugarContent(percent));
-                case CAFFEINE -> this.specification = specification.and(hasCaffeineContent(percent));
                 case PROTEIN -> this.specification = specification.and(hasProteinContents(percent));
                 case VITAMIN -> this.specification = specification.and(hasVitaminContent(percent));
-                case MINERAL -> this.specification = specification.and(hasMineralContent(percent));
             }
         }
         return this;
@@ -81,11 +90,9 @@ public class ProductSpecificationBuilder<T extends Product> {
         return specification;
     }
 
-    public enum ProductContentType{
+    public enum ProductContentTypeForPercents {
         SUGAR,
-        CAFFEINE,
         PROTEIN,
         VITAMIN,
-        MINERAL
     }
 }

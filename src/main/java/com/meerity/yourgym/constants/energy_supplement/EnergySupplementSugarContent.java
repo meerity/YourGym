@@ -1,4 +1,4 @@
-package com.meerity.yourgym.constants.protein;
+package com.meerity.yourgym.constants.energy_supplement;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
-public enum ProteinSugarContent {
+public enum EnergySupplementSugarContent {
     VERY_HIGH(BigDecimal.valueOf(20), "Very High"),
     HIGH(BigDecimal.valueOf(15), "High"),
     MEDIUM(BigDecimal.valueOf(10), "Medium"),
@@ -16,5 +16,4 @@ public enum ProteinSugarContent {
 
     private final BigDecimal percentage;
     private final String description;
-
 }
