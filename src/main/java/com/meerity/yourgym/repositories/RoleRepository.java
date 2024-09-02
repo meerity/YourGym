@@ -1,6 +1,6 @@
 package com.meerity.yourgym.repositories;
 
-import com.meerity.yourgym.model.Role;
+import com.meerity.yourgym.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

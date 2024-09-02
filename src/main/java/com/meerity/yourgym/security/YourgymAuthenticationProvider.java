@@ -1,8 +1,8 @@
 package com.meerity.yourgym.security;
 
-import com.meerity.yourgym.model.Person;
-import com.meerity.yourgym.model.Role;
-import com.meerity.yourgym.repositories.PersonRepository;
+import com.meerity.yourgym.model.entity.Person;
+import com.meerity.yourgym.model.entity.Role;
+import com.meerity.yourgym.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,13 +20,13 @@ import java.util.List;
 @Component
 public class YourgymAuthenticationProvider implements AuthenticationProvider {
 
-    private final PersonRepository personRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PersonService personService;
 
     @Autowired
-    public YourgymAuthenticationProvider(PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+    public YourgymAuthenticationProvider(PasswordEncoder passwordEncoder, PersonService personService) {
         this.passwordEncoder = passwordEncoder;
-        this.personRepository = personRepository;
+        this.personService = personService;
     }
 
 
@@ -34,14 +34,9 @@ public class YourgymAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String emailOrPhone = authentication.getName();
         String password = authentication.getCredentials().toString();
-        Person person;
-        if (emailOrPhone.matches("\\d{12}")) {
-            person = personRepository.findByPhoneNum(emailOrPhone);
-        } else {
-            person = personRepository.findByEmail(emailOrPhone);
-        }
+        Person person = personService.findByEmailOrPhoneNumber(emailOrPhone);
         if (person != null && passwordEncoder.matches(password, person.getPsw())) {
-            return new UsernamePasswordAuthenticationToken(emailOrPhone, null, getAuthorities(person.getRole()));
+            return new UsernamePasswordAuthenticationToken(emailOrPhone, password, getAuthorities(person.getRole()));
         }
         else {
             throw new BadCredentialsException("Invalid credentials");

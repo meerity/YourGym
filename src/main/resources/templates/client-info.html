@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="edit-profile">
+    <div class="container">
+        <h2 class="site-h2">Client Info</h2>
+        <h3 class="caption">Edit client information if needed</h3>
+        <a th:href="@{find-client}" class="back-button">Go Back</a>
+        <div class="messages" th:if="${errors != null}" >
+            <ul>
+                <li th:each="error : ${errors.allErrors}" class="error" th:text="${error.defaultMessage}"></li>
+            </ul>
+        </div>
+        <div class="messages">
+            <ul>
+                <li th:if="${errorMessage != null}" class="error" th:text="${errorMessage}"></li>
+            </ul>
+            <ul>
+                <li th:if="${successMessage != null}" class="success" th:text="${successMessage}"></li>
+            </ul>
+        </div>
+        <form class="form" th:action="@{/operator/edit-client}" th:method="patch" th:object="${editFormT}">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" th:field="*{formFirstName}"/>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" th:field="*{formLastName}"/>
+
+            <label for="phoneNum">Phone Number:</label>
+            <input type="text" id="phoneNum" name="phoneNumber" th:field="*{formPhoneNum}" maxlength="10" />
+
+            <div th:if="${session.person.email != null}">
+                <label for="email">This Person is Registered With Email. You can edit his Email:</label>
+                <input type="email" id="email" name="email" th:field="*{formEmail}"/>
+            </div>
+            <label for="idCard">Gym ID Card:</label>
+            <p th:text="${session.person.card.cardNumber}" id="idCard"></p>
+
+            <label for="paymentDate">Last Payment Date:</label>
+            <p th:text="${session.person.card.lastPaymentDate}" id="paymentDate"></p>
+
+            <p th:if="${session.person.card.trainer == null}">This person doesn't have a trainer</p>
+            <p th:if="${session.person.card.trainer != null}" th:text="${'This person has a trainer: ' + session.person.card.trainer.trainerFirstName + ' ' + session.person.card.trainer.trainerLastName}"></p>
+
+            <label for="trainer">Edit Trainer if Needed. Select From Free Trainers:</label>
+            <select th:field="*{trainerId}" id="trainer">
+                <option value="0">none</option>
+                <option th:each="trainer : ${session.trainers}"
+                        th:value="${trainer.trainerId}"
+                        th:text="${trainer.trainerFirstName + ' ' + trainer.trainerLastName}"></option>
+            </select>
+
+            <button type="submit" class="cta-button">Edit</button>
+        </form>
+        <form class="form" th:action="@{/operator/update-payment-date}" th:method="patch">
+            <button type="submit">Update Client's subscription</button>
+        </form>
+        <form class="form" th:action="@{/operator/delete-client}" th:method="delete">
+            <button type="submit">Delete Client</button>
+        </form>
+    </div>
+</section>
+<div th:replace="~{footer :: footer}">...</div>
+
+</body>
+</html>

@@ -13,6 +13,7 @@
     <div class="container">
         <h2>Register</h2>
         <h3 class="caption">If you have visited YourGym, you can register with your ID Card</h3>
+        <button onclick="history.back()" class="back-button">Go Back</button>
         <div class="messages">
             <ul>
                 <li th:each="error : ${#fields.errors('registrationForm.*')}" class="error" th:text="${error}"></li>

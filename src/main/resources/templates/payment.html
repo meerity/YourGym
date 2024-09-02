@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="payment">
+    <div class="container">
+        <h2 class="site-h2">Pay to renew subscription</h2>
+        <a th:href="@{/profile}" class="back-button">Go Back</a>
+        <form class="form" th:action="@{/payment}" th:method="patch">
+            <button type="submit" class="cta-button">Pay Now</button>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+<script src="/assets/js/link-script.js"></script>
+
+</body>
+</html>

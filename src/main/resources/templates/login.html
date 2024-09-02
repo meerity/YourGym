@@ -12,6 +12,7 @@
 <section id="login">
     <div class="container">
         <h2 class="site-h2">Login</h2>
+        <button onclick="history.back()" class="back-button">Go Back</button>
         <div class="messages">
             <ul>
                 <li class="error" th:if="${!#strings.isEmpty(errorMessage)}"
@@ -27,6 +28,10 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
             <span class="password-toggle" onclick="togglePassword('password')">👁️</span>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">Remember Me</label>
+            </div>
             <div class="form-footer">
                 <button type="submit">Login</button>
                 <a th:href="@{/register}">Don`t have an account?</a>

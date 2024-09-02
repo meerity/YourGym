@@ -38,17 +38,17 @@
         <h2 class="h2-left">Our Trainers</h2>
         <div class="trainer-grid">
             <div class="trainer">
-                <img src="/assets/images/john.png" alt="Trainer 1">
+                <img src="/assets/images/JohnDoe.png" alt="Trainer 1">
                 <h3>John Doe</h3>
                 <p>John is a certified personal trainer with over 10 years of experience. He specializes in strength training and functional fitness, helping clients build muscle and improve their overall fitness levels.</p>
             </div>
             <div class="trainer">
-                <img src="/assets/images/jane.png" alt="Trainer 2">
+                <img src="/assets/images/JaneSmith.png" alt="Trainer 2">
                 <h3>Jane Smith</h3>
                 <p>Jane is a yoga instructor and nutrition expert. With her guidance, clients can achieve a balanced lifestyle through yoga practices and healthy eating habits. She has a passion for holistic wellness and mindfulness.</p>
             </div>
             <div class="trainer">
-                <img src="/assets/images/michael.jpg" alt="Trainer 3">
+                <img src="/assets/images/MichaelBrown.png" alt="Trainer 3">
                 <h3>Michael Brown</h3>
                 <p>Michael is a high-intensity interval training (HIIT) coach with a focus on cardiovascular health and endurance. His dynamic workouts are designed to push clients to their limits while ensuring they have fun and stay motivated.</p>
             </div>
@@ -98,16 +98,16 @@
         const sections = document.querySelectorAll('.section');
 
         const observerOptions = {
-            root: null, // Использовать viewport как корневой элемент
+            root: null,
             rootMargin: '0px',
-            threshold: 0.1 // Когда 10% секции видимо
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Прекратить наблюдение после появления
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);

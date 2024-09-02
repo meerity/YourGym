@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Statistics</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="profile">
+    <div class="container">
+        <h2 class="site-h2">Admin Statistics</h2>
+        <a th:href="@{dashboard}" class="back-button">Go Back</a>
+        <div class="trainer-section">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <div class="sortable-header">
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactName&sortDirection=asc'}">Name</a>
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactName&sortDirection=' + ${reverseSortDir}}" class="sort-arrows">
+                                &#9650;&#9660;
+                            </a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="sortable-header">
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactMobileNum&sortDirection=asc'}">Phone Number</a>
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactMobileNum&sortDirection=' + ${reverseSortDir}}" class="sort-arrows">
+                                &#9650;&#9660;
+                            </a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="sortable-header">
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactEmail&sortDirection=asc'}">Email</a>
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=contactEmail&sortDirection=' + ${reverseSortDir}}" class="sort-arrows">
+                                &#9650;&#9660;
+                            </a>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="sortable-header">
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=message&sortDirection=asc'}">Message</a>
+                            <a th:href="@{'/operator/messages/' + ${currentPage} + '?size=' + ${pageSize} + '&sortField=message&sortDirection=' + ${reverseSortDir}}" class="sort-arrows">
+                                &#9650;&#9660;
+                            </a>
+                        </div>
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="msg : ${contactMessages}">
+                    <td th:text="${msg.contactName}"></td>
+                    <td th:text="${msg.contactMobileNum}"></td>
+                    <td th:text="${msg.contactEmail}"></td>
+                    <td th:text="${msg.message}"></td>
+                    <td>
+                        <form th:action="@{'/operator/message/close/' + ${msg.contactId}}" th:method="patch" class="logout">
+                            <input type="hidden" th:value="${currentPage}" name="pageNum">
+                            <input type="hidden" th:value="${pageSize}" name="size">
+                            <input type="hidden" th:value="${sortField}" name="sortField">
+                            <input type="hidden" th:value="${sortDir}" name="sortDirection">
+                            <button type="submit">CLOSE</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <!-- Page navigation -->
+                <div>
+                    <ul class="pagination">
+                        <li>
+                            <a th:if="${currentPage > 1}"
+                               th:href="@{'/operator/messages/' + ${currentPage - 1} + '?size=' + ${pageSize} + '&sortField=' + ${sortField} + '&sortDirection=' + ${sortDir}}">
+                                <span>&laquo;</span>
+                            </a>
+                            <span th:unless="${currentPage > 1}" class="page-button disabled">
+                            <span>&laquo;</span>
+                            </span>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(1, totalPages)}">
+                            <a th:if="${currentPage != i}"
+                               th:href="@{'/operator/messages/' + ${i} + '?size=' + ${pageSize} + '&sortField=' + ${sortField} + '&sortDirection=' + ${sortDir}}"
+                               th:text="${i}">
+                            </a>
+                            <span th:unless="${currentPage != i}"
+                                  th:text="${i}"
+                                  class="page-button disabled">
+                            </span>
+                        </li>
+                        <li>
+                            <a th:if="${currentPage < totalPages}"
+                               th:href="@{'/operator/messages/' + ${currentPage + 1} + '?size=' + ${pageSize} + '&sortField=' + ${sortField} + '&sortDirection=' + ${sortDir}}">
+                                <span>&raquo;</span>
+                            </a>
+                            <span th:unless="${currentPage < totalPages}" class="page-button disabled">
+                            <span>&raquo;</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Page size selection -->
+                <div class="page-size">
+                    <label for="pageSize">Select page size:</label>
+                    <select id="pageSize" name="pageSize" onchange="location = this.value;">
+                        <option th:each="i : ${pageSizeArray}"
+                                th:value="@{'/operator/messages/1?size=' + ${i} + '&sortField=' + ${sortField} + '&sortDirection=' + ${sortDir}}"
+                                th:selected="${pageSize == i}"
+                                th:text="${i}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+<script src="/assets/js/link-script.js"></script>
+
+</body>
+</html>

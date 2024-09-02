@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Trainer - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="register">
+    <div class="container">
+        <h2 class="site-h2">Add new Trainer</h2>
+        <a th:href="@{dashboard}" class="back-button">Go Back</a>
+        <div class="messages">
+            <ul>
+                <li th:each="error : ${#fields.errors('newTrainer.*')}" class="error" th:text="${error}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/operator/add-trainer}" method="post" class="form" th:object="${newTrainer}">
+            <label for="firstName">First Name:</label>
+            <input type="text" th:field="*{trainerFirstName}" id="firstName" name="firstName">
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" th:field="*{trainerLastName}" id="lastName" name="lastName">
+
+
+
+            <button type="submit">Add</button>
+        </form>
+
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+
+
+</body>
+</html>

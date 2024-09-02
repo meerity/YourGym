@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Client - YourGym</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" th:href="@{/assets/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="register">
+    <div class="container">
+        <h2 class="site-h2">Find Client By Id Card</h2>
+        <a th:href="@{dashboard}" class="back-button">Go Back</a>
+        <div class="messages">
+            <ul>
+                <li th:if="${errorMessage != null}" class="error" th:text="${errorMessage}"></li>
+            </ul>
+        </div>
+        <form th:action="@{/operator/client-info}" th:method="get" class="form">
+            <label for="cardNum">Gym ID Card:</label>
+            <input type="text" id="cardNum" name="cardNum">
+            <button type="submit">Search</button>
+        </form>
+
+    </div>
+</section>
+
+<div th:replace="~{footer :: footer}">...</div>
+
+</body>
+</html>

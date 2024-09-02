@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+</head>
+<body>
+<div th:replace="~{header :: header}">...</div>
+
+<section id="edit-profile">
+    <div class="container">
+        <h2 class="site-h2">Edit Profile</h2>
+        <a th:href="@{/profile}" class="back-button">Go Back</a>
+        <div class="messages">
+            <ul>
+                <li th:each="error : ${#fields.errors('editForm.*')}" class="error" th:text="${error}"></li>
+            </ul>
+        </div>
+        <form class="form" th:href="@{/profile/edit}" th:method="patch" th:object="${editForm}">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" th:field="*{formFirstName}"/>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" th:field="*{formLastName}"/>
+            <label for="phoneNum">Phone Number:</label>
+            <input type="text" id="phoneNum" name="phoneNumber" th:field="*{formPhoneNum}"/>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" th:field="*{formEmail}"/>
+            <button type="submit" class="cta-button">Save Changes</button>
+        </form>
+    </div>
+</section>
+<div th:replace="~{footer :: footer}">...</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 package com.meerity.yourgym.controllers;
 
-import com.meerity.yourgym.model.Contact;
+import com.meerity.yourgym.model.entity.Contact;
 import com.meerity.yourgym.service.ContactService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

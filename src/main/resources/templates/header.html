@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head>
 
-</head>
 <body>
 <header>
     <div class="container">
@@ -18,7 +16,9 @@
 
             <a th:href="@{/feedback}">Contact Us</a>
 
-            <a th:href="@{/profile}" sec:authorize="isAuthenticated()" >Profile</a>
+            <a th:href="@{/profile}" sec:authorize="hasRole('ROLE_CLIENT')" >Profile</a>
+
+            <a th:href="@{/operator/dashboard}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')" >Dashboard</a>
 
             <a th:href="@{/login}" class="login-button"
                sec:authorize="isAnonymous()">Login</a>
@@ -26,8 +26,10 @@
             <a th:href="@{/register}" class="login-button"
                sec:authorize="isAnonymous()">Register</a>
 
-            <a th:href="@{/logout}" class="login-button"
-               sec:authorize="isAuthenticated()">Logout</a>
+            <form class="logout" sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button type="submit">Logout</button>
+            </form>
+
         </nav>
     </div>
 </header>

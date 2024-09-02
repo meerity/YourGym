@@ -1,6 +1,6 @@
 package com.meerity.yourgym.repositories;
 
-import com.meerity.yourgym.model.ClientCard;
+import com.meerity.yourgym.model.entity.ClientCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ClientCardRepository extends JpaRepository<ClientCard, Long> {
 
     ClientCard findByCardNumber(String cardNumber);
-
 }
